@@ -14,9 +14,12 @@ function onBeasts(err, records) {
 function getMenu(records) {
     for (let i = 0; i < records.length; i++) {
         let image = document.createElement("img");
+        let imageDiv = document.createElement("div");
         let navBar = document.getElementById("nav-bar");
         image.setAttribute("src", records[i].fields.Image[0].url);
-        navBar.appendChild(image);
+        imageDiv.appendChild(image);
+        imageDiv.style.flex = 1;
+        navBar.appendChild(imageDiv);
         getDetails(image, i, records);
     }
 }

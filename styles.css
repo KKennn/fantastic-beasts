@@ -17,17 +17,14 @@ body {
 
 #nav-bar {
     display: flex;
-    width: 100%;
+    width: 100%-16px;
     margin: 8px;
     margin-bottom: 24px;
 }
 
 #nav-bar img {
     flex: 1;
-    /* width: 10vw;
-    height: 25vw; */
-    max-width: 50px;
-    max-height: 50px;
+    width: 100%;
     object-fit: cover;
     padding: 4px;
 }
@@ -39,10 +36,12 @@ body {
 #details {
     text-align: center;
     margin: 0 auto;
+    padding-left: 16px;
+    padding-right: 16px;
 }
 
 table {
-    width: 367px;
+    width: 360px;
     margin: 0 auto;
     text-align: left;
     -webkit-border-horizontal-spacing: 0px;
@@ -58,6 +57,10 @@ td {
 #detail-name {
     font-size: 24px;
     margin: 16px;
+}
+
+#detail-image {
+    width: 360px;
 }
 
 a {

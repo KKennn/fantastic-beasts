@@ -81,7 +81,7 @@ footer {
     width: 500px;
     padding: 160px 0;
     text-align: center;
-    border-image: url(/cover.png) 23 / 30px 30px / 1rem;
+    border-image: url(cover.png) 23 / 30px 30px / 1rem;
 }
 
 #cover img {

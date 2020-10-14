@@ -5,6 +5,8 @@ var base = new Airtable({ apiKey: "keyp2cGxIzzjbsuNo" }).base(
 
 base('Beasts').select().firstPage(onBeasts);
 
+let cover = document.getElementById("cover");
+
 function onBeasts(err, records) {
     if (err) { console.error(err); return; }
     console.log(records);
@@ -13,25 +15,28 @@ function onBeasts(err, records) {
 
 function getMenu(records) {
     for (let i = 0; i < records.length; i++) {
-        let image = document.createElement("img");
-        let imageDiv = document.createElement("div");
-        let navBar = document.getElementById("nav-bar");
-        image.setAttribute("src", records[i].fields.Image[0].url);
-        imageDiv.appendChild(image);
-        imageDiv.style.flex = 1;
-        navBar.appendChild(imageDiv);
-        getDetails(image, i, records);
+        if (records[i].fields.Name) {
+            let imageThumbnail = document.createElement("img");
+            let imageDiv = document.createElement("div");
+            let navBar = document.getElementById("nav-bar");
+            imageThumbnail.setAttribute("src", records[i].fields.Image[0].thumbnails.small.url);
+            imageDiv.appendChild(imageThumbnail);
+            imageDiv.style.flex = 1;
+            navBar.appendChild(imageDiv);
+            getDetails(imageThumbnail, i, records);
+        }
     }
 }
 
-function getDetails(image, i, records) {
-    image.addEventListener("click", () => {
+function getDetails(imageThumbnail, i, records) {
+    imageThumbnail.addEventListener("click", () => {
+        if (cover.style.display != "none") cover.style.display = "none"
         let detailImage = document.getElementById("detail-image");
-        detailImage.setAttribute("src", image.getAttribute("src"));
+        detailImage.setAttribute("src", records[i].fields.Image[0].url);
         let detailName = document.getElementById("detail-name");
         detailName.innerHTML = records[i].fields.Name;
-        let detailText = document.getElementById("detail-text");
-        detailText.innerText = "";
+        let detailTable = document.getElementById("detail-table");
+        detailTable.innerText = "";
         let keyNames = Object.keys(records[i].fields);
         keyNames.forEach(item => {
             if (item != "Image" && item != "Name") {
@@ -43,7 +48,7 @@ function getDetails(image, i, records) {
                 fieldKey.style.fontWeight = "bold";
                 field.appendChild(fieldKey);
                 field.appendChild(fieldValue);
-                detailText.appendChild(field);
+                detailTable.appendChild(field);
             }
         })
     })
